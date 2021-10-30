@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/screen_arguments.dart';
+import '../widgets/product/product_list.dart';
+import '../providers/product_list_provider.dart';
+import '../widgets/app_drawer.dart';
+
+class ProductsOverviewScreen extends StatefulWidget {
+  static String routeName = '/productOverview';
+
+  @override
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  var _isLoading = false;
+  var _isInit = true;
+
+  int? catId;
+  String catName = "Anyvas";
+
+  Future<void> _refreshProducts(BuildContext context) async {
+    await Provider.of<ProductListProvider>(context, listen: false)
+        .getProducts(id: catId);
+    print('product overview page refreshindication');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      if (ModalRoute.of(context)!.settings.arguments == null) {
+        catId = 1;
+      } else {
+        var args =
+            ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+        catId = args.id;
+        catName = args.title.toString();
+        // print('didchangedependencies product_overview_screen catid $catId');
+      }
+      Provider.of<ProductListProvider>(
+        context,
+      ).getProducts(id: catId).then((value) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+      // print('didchangedependencies');
+      _isInit = false;
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(catName),
+        actions: const <Widget>[],
+      ),
+      drawer: AppDrawer(),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : RefreshIndicator(
+              onRefresh: () => _refreshProducts(context),
+              child: ProductList(catId: catId),
+            ),
+    );
+  }
+}
