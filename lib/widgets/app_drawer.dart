@@ -41,32 +41,30 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: [
-          AppBar(
-            title: const Text('Categories'),
-            automaticallyImplyLeading: false,
-          ),
-          Container(
-            color: Color(0xff001a41),
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height,
-              minWidth: MediaQuery.of(context).size.width,
-            ),
-            child: _isLoading
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Categories'),
+          automaticallyImplyLeading: false,
+        ),
+        body:
+            Container(
+              color: const Color(0xff001a41),
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height,
+                minWidth: MediaQuery.of(context).size.width,
+              ),
+              child:
+            _isLoading
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : SingleChildScrollView(
-                    child: Consumer<CategoriesProvider>(
-                      builder: (ctx, categories, _) => RefreshIndicator(
-                        onRefresh: () => _refreshPage(context),
-                        child: CategoriesList(),
-                      ),
+                : Consumer<CategoriesProvider>(
+                    builder: (ctx, categories, _) => RefreshIndicator(
+                      onRefresh: () => _refreshPage(context),
+                      child: CategoriesList(),
                     ),
                   ),
-          ),
-        ],
+      ),
       ),
     );
   }

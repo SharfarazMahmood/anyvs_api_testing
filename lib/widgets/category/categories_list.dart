@@ -12,7 +12,7 @@ class CategoriesList extends StatelessWidget {
     final categories = categoriesData.items;
 
     return ListView.builder(
-      shrinkWrap: true,
+      // shrinkWrap: true,
       itemCount: categories.length,
       itemBuilder: (ctx, index) => ChangeNotifierProvider.value(
         value: categories[index],
