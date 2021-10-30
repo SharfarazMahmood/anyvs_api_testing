@@ -24,7 +24,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Future<void> _refreshProducts(BuildContext context) async {
     product = Provider.of<ProductMdl>(context, listen: false);
     await product!.getProductDetails(id: prodId);
-    print('product details page refreshindication');
+    // print('product details page refreshindication');
   }
 
   @override

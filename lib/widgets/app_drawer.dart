@@ -14,7 +14,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   Future<void> _refreshPage(BuildContext context) async {
     await Provider.of<CategoriesProvider>(context, listen: false)
-        .getCategories();
+        .getCategoriesFromAPI();
   }
 
   @override
@@ -46,25 +46,23 @@ class _AppDrawerState extends State<AppDrawer> {
           title: const Text('Categories'),
           automaticallyImplyLeading: false,
         ),
-        body:
-            Container(
-              color: const Color(0xff001a41),
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height,
-                minWidth: MediaQuery.of(context).size.width,
-              ),
-              child:
-            _isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Consumer<CategoriesProvider>(
-                    builder: (ctx, categories, _) => RefreshIndicator(
-                      onRefresh: () => _refreshPage(context),
-                      child: CategoriesList(),
-                    ),
+        body: Container(
+          color: const Color(0xff001a41),
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height,
+            minWidth: MediaQuery.of(context).size.width,
+          ),
+          child: _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Consumer<CategoriesProvider>(
+                  builder: (ctx, categories, _) => RefreshIndicator(
+                    onRefresh: () => _refreshPage(context),
+                    child: CategoriesList(),
                   ),
-      ),
+                ),
+        ),
       ),
     );
   }

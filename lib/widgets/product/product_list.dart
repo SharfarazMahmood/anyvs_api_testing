@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductList extends StatelessWidget {
-  int? catId;
-  ProductList({Key? key, this.catId}) : super(key: key);
+  final int? catId;
+  ProductList({Key? key, this.catId = 1}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

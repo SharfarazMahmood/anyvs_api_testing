@@ -22,7 +22,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Future<void> _refreshProducts(BuildContext context) async {
     await Provider.of<ProductListProvider>(context, listen: false)
         .getProducts(id: catId);
-    print('product overview page refreshindication');
+    // print('product overview page refreshindication');
   }
 
   @override
