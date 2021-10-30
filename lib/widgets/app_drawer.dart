@@ -54,10 +54,13 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
           child: _isLoading
               ? const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Color(0xffe99800),
+                  ),
                 )
               : Consumer<CategoriesProvider>(
                   builder: (ctx, categories, _) => RefreshIndicator(
+                    color:const Color(0xffe99800),
                     onRefresh: () => _refreshPage(context),
                     child: CategoriesList(),
                   ),

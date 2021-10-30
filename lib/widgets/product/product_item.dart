@@ -1,9 +1,10 @@
-import 'package:anyvas_api_testing/models/product_model.dart';
-import 'package:anyvas_api_testing/models/screen_arguments.dart';
-import 'package:anyvas_api_testing/screens/product_details.dart';
-import 'package:anyvas_api_testing/widgets/add_to_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import '../../models/product_model.dart';
+import '../../models/screen_arguments.dart';
+import '../../screens/product_details.dart';
+import '../../widgets/add_to_cart_button.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<ProductMdl>(context, listen: false);
     return ClipRRect(
+      
       borderRadius: BorderRadius.circular(5),
       child: GestureDetector(
         onTap: () {
@@ -26,12 +28,29 @@ class ProductItem extends StatelessWidget {
         child: GridTile(
           child: Hero(
             tag: product.id,
-            child: FadeInImage(
-              placeholder:
-                  const AssetImage('assets/images/product-placeholder.png'),
-              image: NetworkImage(product.defaultPictureModel!.imageUrl),
+            child: CachedNetworkImage(
+              imageUrl: product.defaultPictureModel!.imageUrl,
+              placeholder: (context, url) =>
+                  const Center(child: Text("Loading...")),
               fit: BoxFit.cover,
             ),
+            ////////////// using Image.network, always gets image from network //////////////
+            // child: Image.network(
+            //   product.defaultPictureModel!.imageUrl,
+            //   loadingBuilder: (_, child, loadingProgress) {
+            //     if (loadingProgress == null) {
+            //       return child;
+            //     }
+            //     return const Center(child: Text("Loading..."));
+            //   },
+            // ),
+            ////////////// using NewtworkImage, always gets image from network //////////////
+            // child: FadeInImage(
+            //   placeholder:
+            //       const AssetImage('assets/images/product-placeholder.png'),
+            //   image: NetworkImage(product.defaultPictureModel!.imageUrl),
+            //   fit: BoxFit.cover,
+            // ),
           ),
           footer: GridTileBar(
             backgroundColor: Colors.black54,

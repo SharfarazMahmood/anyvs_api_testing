@@ -1,5 +1,6 @@
 import 'package:anyvas_api_testing/models/product_model.dart';
 import 'package:anyvas_api_testing/models/screen_arguments.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,9 +68,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       body: _isLoading
           ? const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Color(0xffe99800),
+              ),
             )
           : RefreshIndicator(
+              color: const Color(0xffe99800),
               onRefresh: () => _refreshProducts(context),
               child: CustomScrollView(
                 slivers: <Widget>[
@@ -85,10 +89,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                       background: Hero(
                         tag: product!.id,
-                        child: Image.network(
-                          product!.defaultPictureModel!.imageUrl,
-                          fit: BoxFit.cover,
+                        child: CachedNetworkImage(
+                          imageUrl: product!.defaultPictureModel!.imageUrl,
+                          placeholder: (context, url) =>
+                              const Center(child: Text("Loading...")),
+                          fit: BoxFit.contain,
                         ),
+                        // child: Image.network(
+                        //   product!.defaultPictureModel!.imageUrl,
+                        //   fit: BoxFit.cover,
+                        // ),
                       ),
                     ),
                   )

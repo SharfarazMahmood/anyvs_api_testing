@@ -69,9 +69,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       drawer: AppDrawer(),
       body: _isLoading
           ? const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Color(0xffe99800),
+              ),
             )
           : RefreshIndicator(
+            color: const Color(0xffe99800),
               onRefresh: () => _refreshProducts(context),
               child: ProductList(catId: catId),
             ),
