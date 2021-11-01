@@ -15,13 +15,14 @@ class ProductsOverviewScreen extends StatefulWidget {
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _isLoading = false;
   var _isInit = true;
+  var _noData = false;
 
   int? catId;
   String catName = "Anyvas";
 
   Future<void> _refreshProducts(BuildContext context) async {
     await Provider.of<ProductListProvider>(context, listen: false)
-        .getProducts(id: catId);
+        .getProducts(catId: catId);
     // print('product overview page refreshindication');
   }
 
@@ -46,13 +47,18 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         catName = args.title.toString();
         // print('didchangedependencies product_overview_screen catid $catId');
       }
-      Provider.of<ProductListProvider>(
-        context,
-      ).getProducts(id: catId).then((value) {
-        setState(() {
-          _isLoading = false;
+        var productsList = Provider.of<ProductListProvider>(
+          context,
+        );
+        productsList.getProducts(catId: catId).then((value) {
+          setState(() {
+            _isLoading = false;
+            // if (productsList.items.isEmpty) {
+            //   _noData = true;
+            // }
+          });
         });
-      });
+      
       // print('didchangedependencies');
       _isInit = false;
     }
@@ -73,10 +79,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 color: Color(0xffe99800),
               ),
             )
-          : RefreshIndicator(
-            color: const Color(0xffe99800),
+          :  RefreshIndicator(
+              color: const Color(0xffe99800),
               onRefresh: () => _refreshProducts(context),
-              child: ProductList(catId: catId),
+              child:  ProductList(catId: catId),
             ),
     );
   }

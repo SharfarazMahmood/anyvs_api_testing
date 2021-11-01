@@ -51,7 +51,7 @@ Future<String> fetchFromApi(int? id) async {
     var responseData = await response.stream.bytesToString();
     return responseData;
   } else {
-    print(response.reasonPhrase);
+    print("${response.statusCode}  ${response.reasonPhrase}");
   }
 
   return "-1";
