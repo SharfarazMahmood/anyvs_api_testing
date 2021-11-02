@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anyvas_api_testing">
+      <uses-permission android:name="android.permission.INTERNET"/> 
    <application
         android:label="anyvas_api_testing"
         android:icon="@mipmap/ic_launcher">
