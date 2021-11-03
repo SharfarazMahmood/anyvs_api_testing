@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:anyvas_api_testing/widgets/authentication/auth_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,7 @@ class AuthScreen extends StatelessWidget {
                 children: <Widget>[
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
-                    child: Container(),
+                    child: AuthCard(),
                   ),
                 ],
               ),

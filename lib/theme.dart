@@ -15,18 +15,26 @@ ThemeData theme() {
 
 InputDecorationTheme inputDecorationTheme() {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(28),
-    borderSide: const BorderSide(color: kTextColor),
+    borderRadius: BorderRadius.circular(5),
+    // borderSide: const BorderSide(color: kTextColor),
     gapPadding: 10,
   );
   return InputDecorationTheme(
     // If  you are using latest version of flutter then lable text and hint text shown like this
     // if you r using flutter less then 1.20.* then maybe this is not working properly
     // if we are define our floatingLabelBehavior in our theme then it's not applayed
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 42, vertical: 20),
-    enabledBorder: outlineInputBorder,
-    focusedBorder: outlineInputBorder,
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    floatingLabelStyle: TextStyle(
+      color:  Color(0xff001a41),
+    ),
+    fillColor: Color(0xfff5f5f6),
+    filled: true,
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 20,
+      vertical: 10,
+    ),
+    // enabledBorder: outlineInputBorder,
+    // focusedBorder: outlineInputBorder,
     border: outlineInputBorder,
   );
 }
@@ -43,7 +51,7 @@ AppBarTheme appBarTheme() {
     color: Color(0xff001a41),
     elevation: 0,
     brightness: Brightness.light,
-    iconTheme: IconThemeData(color: Color(0xffe99800 )),
+    iconTheme: IconThemeData(color: Color(0xffe99800)),
     textTheme: TextTheme(
       headline6: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
     ),
