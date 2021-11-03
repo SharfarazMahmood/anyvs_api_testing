@@ -23,7 +23,7 @@ class _DropDownMenuState extends State<DropDownMenu> {
       onSelected: (FilterOptions selectedValue) {
         setState(() {
           if (selectedValue == FilterOptions.Login) {
-            // Navigator.of(context).pushNamed(AuthScreen.routeName);
+            Navigator.of(context).pushNamed(AuthScreen.routeName);
           }
         });
       },
