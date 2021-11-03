@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:anyvas_api_testing/models/product_model.dart';
+import 'package:anyvas_api_testing/screens/auth_screen.dart';
 import 'package:anyvas_api_testing/screens/product_details.dart';
 import 'package:anyvas_api_testing/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
 
         ),
         routes: {
+          AuthScreen.routeName: (context)=> AuthScreen(),
           ProductsOverviewScreen.routeName: (context) =>
               ProductsOverviewScreen(),
           ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
