@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:anyvas_api_testing/models/product_model.dart';
+import 'package:anyvas_api_testing/providers/auth_provider.dart';
 import 'package:anyvas_api_testing/screens/auth_screen.dart';
 import 'package:anyvas_api_testing/screens/product_details.dart';
 import 'package:anyvas_api_testing/screens/splash_screen.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
+          value: AuthProvider(),
+        ),
+        ChangeNotifierProvider.value(
           value: CategoriesProvider(),
         ),
         ChangeNotifierProvider.value(
@@ -34,16 +38,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         title: "Anyvas",
-        home:  AnimatedSplashScreen(
+        home: AnimatedSplashScreen(
           duration: 2000,
           splash: Splash(),
           splashTransition: SplashTransition.fadeTransition,
           nextScreen: ProductsOverviewScreen(),
-          backgroundColor:const Color(0xff001a41),
-
+          backgroundColor: const Color(0xff001a41),
         ),
         routes: {
-          AuthScreen.routeName: (context)=> AuthScreen(),
+          AuthScreen.routeName: (context) => AuthScreen(),
           ProductsOverviewScreen.routeName: (context) =>
               ProductsOverviewScreen(),
           ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
