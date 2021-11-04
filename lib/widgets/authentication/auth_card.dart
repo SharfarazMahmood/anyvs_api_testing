@@ -107,7 +107,9 @@ class _AuthCardState extends State<AuthCard>
         constraints: BoxConstraints(),
         width: deviceSize.width < 600
             ? deviceSize.width * 0.80
-            : deviceSize.width * 0.65,
+            : deviceSize.width > 900
+                ? deviceSize.width * 0.30
+                : deviceSize.width * 20,
         padding: EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,

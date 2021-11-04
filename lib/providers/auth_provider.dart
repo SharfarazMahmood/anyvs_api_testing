@@ -10,6 +10,12 @@ import '../models/http_exception.dart';
 class AuthProvider with ChangeNotifier {
   bool _loggedIn = false;
   String _userId = "no_id";
+  User? userData;
+
+  bool get loggedIn {
+    return _loggedIn;
+  }
+
   String get userId {
     return _userId;
   }
@@ -33,8 +39,8 @@ class AuthProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         var responseData = await response.stream.bytesToString();
-        User userData = await createUserObject(responseData);
-        print("${userData.email}, ${userData.phone} ${userData.username} ");
+        userData = await createUserObject(responseData);
+        print("${userData!.username} ${userData!.userToken.toString()}");
         _loggedIn = true;
         notifyListeners();
         return true;
@@ -88,12 +94,12 @@ Future<List<String>> createHttpErrorList(String responseData) async {
 Future<User> createUserObject(String responseData) async {
   final extractedData = json.decode(responseData) as Map<String, dynamic>;
   final userData = User(
-    email: extractedData['Data']['Info']['Email'],
-    phone: extractedData['Data']['Info']['Phone'],
-    username: extractedData['Data']['Info']['Username'],
-    firstName: extractedData['Data']['Info']['FirstName'],
-    lastName: extractedData['Data']['Info']['LastName'],
-  );
+      email: extractedData['Data']['Info']['Email'],
+      phone: extractedData['Data']['Info']['Phone'],
+      username: extractedData['Data']['Info']['Username'],
+      firstName: extractedData['Data']['Info']['FirstName'],
+      lastName: extractedData['Data']['Info']['LastName'],
+      token: extractedData['Data']['Token']);
   // print("${userData.email}, ${userData.phone} ${userData.username} ");
 
   return userData;
