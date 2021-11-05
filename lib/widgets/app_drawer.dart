@@ -14,7 +14,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
   Future<void> _refreshPage(BuildContext context) async {
     await Provider.of<CategoriesProvider>(context, listen: false)
-        .getCategoriesFromAPI();
+        .fetchFromAPI();
   }
 
   @override
