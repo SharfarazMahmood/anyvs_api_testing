@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class ProductList extends StatelessWidget {
   final int? catId;
-  var _noDataText = "Unable to reach server...\n Please Try again later";
+  final _noDataText = "Unable to reach server...\n Please Try again later";
 
   ProductList({Key? key, this.catId = 1}) : super(key: key);
 

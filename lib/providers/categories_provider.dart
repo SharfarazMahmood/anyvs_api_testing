@@ -46,13 +46,13 @@ class CategoriesProvider with ChangeNotifier {
       toBeSaved = Category.encode(_items);
       // print(toBeSaved);
 
-      Future<bool>? saved = null;
+      // Future<bool>? saved = null;
       try {
         await SharedPreferences.getInstance().then((prefs) {
-          saved = prefs.setString('categoryList', toBeSaved);
+          // saved = prefs.setString('categoryList', toBeSaved);
+          prefs.setString('categoryList', toBeSaved);
         });
       } on Exception catch (e) {
-        // TODO
         print(e);
       }
       // print(saved.toString());
