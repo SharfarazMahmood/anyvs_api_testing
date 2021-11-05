@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:anyvas_api_testing/widgets/dropdown.dart';
 import '../models/screen_arguments.dart';
-import '../widgets/product/product_list.dart';
+import 'product/product_list.dart';
 import '../providers/product_list_provider.dart';
 import '../widgets/app_drawer.dart';
 

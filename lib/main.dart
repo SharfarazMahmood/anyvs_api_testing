@@ -6,8 +6,8 @@ import '../configs/providers_list.dart';
 import '../configs/routes.dart';
 //////// import of other screens, widgets ////////
 import '../screens/splash_screen.dart';
-import './theme.dart';
-import './widgets/products_overview_screen.dart';
+import 'configs/theme.dart';
+import 'screens/products_overview_screen.dart';
 
 void main() {
   runApp(const MyApp());

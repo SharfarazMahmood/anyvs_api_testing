@@ -1,12 +1,5 @@
-import 'dart:math';
-
-import 'package:anyvas_api_testing/widgets/authentication/auth_card.dart';
+import 'package:anyvas_api_testing/screens/authentication/auth_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/http_exception.dart';
-import '../providers/auth_provider.dart';
-
 
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -52,4 +45,3 @@ class AuthScreen extends StatelessWidget {
     );
   }
 }
-

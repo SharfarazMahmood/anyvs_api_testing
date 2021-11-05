@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../models/product_model.dart';
 import '../../models/screen_arguments.dart';
-import '../../screens/product_details.dart';
+import 'product_details.dart';
 import '../../widgets/add_to_cart_button.dart';
 
 class ProductItem extends StatelessWidget {
@@ -13,7 +13,6 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<ProductMdl>(context, listen: false);
     return ClipRRect(
-      
       borderRadius: BorderRadius.circular(5),
       child: GestureDetector(
         onTap: () {

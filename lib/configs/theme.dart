@@ -25,7 +25,7 @@ InputDecorationTheme inputDecorationTheme() {
     // if we are define our floatingLabelBehavior in our theme then it's not applayed
     floatingLabelBehavior: FloatingLabelBehavior.never,
     floatingLabelStyle: TextStyle(
-      color:  Color(0xff001a41),
+      color: Color(0xff001a41),
     ),
     fillColor: Color(0xfff5f5f6),
     filled: true,

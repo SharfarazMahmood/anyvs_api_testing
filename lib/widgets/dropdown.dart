@@ -1,7 +1,7 @@
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:anyvas_api_testing/providers/auth_provider.dart';
+import 'package:anyvas_api_testing/screens/authentication/auth_screen.dart';
 
 enum FilterOptions {
   Login,
@@ -37,8 +37,7 @@ class _DropDownMenuState extends State<DropDownMenu> {
                   children: <Widget>[
                     user.userData == null
                         ? Text("  ")
-                        : Text(
-                            "${user.userData!.firstName}"),
+                        : Text("${user.userData!.firstName}"),
                     SizedBox(width: 5),
                     Padding(
                       padding: const EdgeInsets.all(5.0),

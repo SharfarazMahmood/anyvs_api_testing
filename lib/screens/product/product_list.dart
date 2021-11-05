@@ -1,5 +1,5 @@
 import 'package:anyvas_api_testing/providers/product_list_provider.dart';
-import 'package:anyvas_api_testing/widgets/product/product_item.dart';
+import 'package:anyvas_api_testing/screens/product/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,7 @@ class ProductList extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20.0),
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height-300,
+                  minHeight: MediaQuery.of(context).size.height - 300,
                 ),
                 child: Center(
                   child: Text(_noDataText),

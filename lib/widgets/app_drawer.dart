@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/categories_provider.dart';
-import './category/categories_list.dart';
+import '../screens/category/categories_list.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -60,7 +60,7 @@ class _AppDrawerState extends State<AppDrawer> {
                 )
               : Consumer<CategoriesProvider>(
                   builder: (ctx, categories, _) => RefreshIndicator(
-                    color:const Color(0xffe99800),
+                    color: const Color(0xffe99800),
                     onRefresh: () => _refreshPage(context),
                     child: CategoriesList(),
                   ),

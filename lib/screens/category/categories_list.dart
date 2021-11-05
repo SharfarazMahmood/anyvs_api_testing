@@ -1,5 +1,5 @@
 import 'package:anyvas_api_testing/models/screen_arguments.dart';
-import 'package:anyvas_api_testing/widgets/products_overview_screen.dart';
+import 'package:anyvas_api_testing/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/categories_provider.dart';
