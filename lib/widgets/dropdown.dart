@@ -35,9 +35,9 @@ class _DropDownMenuState extends State<DropDownMenu> {
               builder: (BuildContext context, user, Widget? child) {
                 return Row(
                   children: <Widget>[
-                    user.userData == null
+                    user.user == null
                         ? Text("  ")
-                        : Text("${user.userData!.firstName}"),
+                        : Text("${user.user!.firstName}"),
                     SizedBox(width: 5),
                     Padding(
                       padding: const EdgeInsets.all(5.0),
