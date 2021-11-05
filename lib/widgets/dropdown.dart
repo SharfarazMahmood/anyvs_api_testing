@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../configs/enums.dart';
 import 'package:anyvas_api_testing/providers/auth_provider.dart';
 import 'package:anyvas_api_testing/screens/authentication/auth_screen.dart';
-
-enum FilterOptions {
-  Login,
-  Favorites,
-  All,
-}
 
 class DropDownMenu extends StatefulWidget {
   DropDownMenu({Key? key}) : super(key: key);
@@ -17,60 +12,58 @@ class DropDownMenu extends StatefulWidget {
 }
 
 class _DropDownMenuState extends State<DropDownMenu> {
-  String dropdownValue = "not selected";
-
   @override
   Widget build(BuildContext context) {
-    final loggedIn = Provider.of<AuthProvider>(context).loggedIn;
-    return PopupMenuButton(
-      onSelected: (FilterOptions selectedValue) {
-        setState(() {
-          if (selectedValue == FilterOptions.Login) {
-            Navigator.of(context).pushNamed(AuthScreen.routeName);
-          }
-        });
-      },
-      child: loggedIn
-          ? Consumer<AuthProvider>(
-              builder: (BuildContext context, user, Widget? child) {
-                return Row(
-                  children: <Widget>[
-                    user.user == null
-                        ? Text("  ")
-                        : Text("${user.user!.firstName}"),
-                    SizedBox(width: 5),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Icon(Icons.account_circle),
-                    ),
-                  ],
-                );
-              },
-              // child:
-            )
-          : Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Icon(Icons.more_vert),
+    return Consumer<AuthProvider>(
+        builder: (BuildContext context, user, Widget? _) {
+      return PopupMenuButton(
+        onSelected: (AuthenticationType selectedValue) {
+          // setState(() {
+            if (selectedValue == AuthenticationType.Login) {
+              Navigator.of(context).pushNamed(AuthScreen.routeName);
+            } else if (selectedValue == AuthenticationType.Logout) {
+              user.logout();
+            } else if (selectedValue == AuthenticationType.Signup) {
+            } else if (selectedValue == AuthenticationType.None) {}
+          // });
+        },
+        child: Row(
+          children: <Widget>[
+            user.loggedIn ? Text("${user.user!.firstName}") : Text("  "),
+            SizedBox(width: 4),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Icon(Icons.settings),
             ),
-      itemBuilder: (_) => [
-        PopupMenuItem(
-          child: loggedIn
-              ? Row(
-                  children: <Widget>[
-                    Icon(Icons.login),
-                    SizedBox(width: 5),
-                    Text("Logout"),
-                  ],
-                )
-              : Row(
-                  children: <Widget>[
-                    Icon(Icons.login),
-                    SizedBox(width: 5),
-                    Text("Login"),
-                  ],
-                ),
-          value: FilterOptions.Login,
+          ],
         ),
+        itemBuilder: (_) => [
+          PopupMenuItem(
+              child: user.loggedIn
+                  ? rowItem('Profile', Icons.account_circle)
+                  : rowItem('Sigup', Icons.person_add),
+              value: user.loggedIn
+                  ? AuthenticationType.None
+                  : AuthenticationType.Signup),
+          PopupMenuItem(
+            child: user.loggedIn
+                ? rowItem('Logout', Icons.logout)
+                : rowItem('Login', Icons.login),
+            value: user.loggedIn
+                ? AuthenticationType.Logout
+                : AuthenticationType.Login,
+          ),
+        ],
+      );
+    });
+  }
+
+  Row rowItem(String text, IconData icon) {
+    return Row(
+      children: <Widget>[
+        Icon(icon),
+        SizedBox(width: 5),
+        Text(text),
       ],
     );
   }

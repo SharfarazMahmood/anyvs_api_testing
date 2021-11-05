@@ -53,10 +53,10 @@ class AuthProvider with ChangeNotifier {
           print(e);
         }
 
-        print("${_userData!.username} ${_userData!.token.toString()}");
+        // print("${_userData!.username} ${_userData!.token.toString()}");
         _loggedIn = true;
         notifyListeners();
-        print('LOGGED IN ');
+        // print('LOGGED IN ');
         return true;
         // log(responseData);
       } else {
@@ -91,7 +91,7 @@ class AuthProvider with ChangeNotifier {
       if (_savedData != null) {
         _userData = User.decode(_savedData);
         print('${_userData!.firstName}  ${_userData!.lastName}');
-        print('loading saved user data');
+        // print('loading saved user data');
         res = true;
       }
     });
@@ -100,8 +100,9 @@ class AuthProvider with ChangeNotifier {
         _userData!.email,
         EncryDecry.methods().toDecrypt(_userData!.getCredential),
       );
+      return result;
     }
-    return result;
+    return false;
   }
 
   Future<bool> login(String? email, String? password) async {
@@ -109,6 +110,43 @@ class AuthProvider with ChangeNotifier {
       email,
       password,
     );
+  }
+
+  Future<bool> logout() async {
+    var headers = {
+      'NST':
+          'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJOU1RfS0VZIjoidGVzdGFwaTEyM3Nha2hhdyJ9.l9txvKvpCrPsW78C9CFfUEVBbZcPpC7kBESRWBUthWjBG6dfP0YgrtoNKoe-PHExT_LGzYXoT1vvxGzWKxDGMA',
+      'Tocken':
+          'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJOU1RfS0VZIjoidGVzdGFwaTEyM3Nha2hhdyJ9.ca-7lHYgFnU_LXR_Q6_j3pIVb8oAkbn7kDonJn_4SepPhewJ6AHJyLUoITkAsIeOhakoePZ1bjq1rAb3f0GwrQ',
+      'DeviceId': 'DeviceId',
+    };
+    var request =
+        http.Request('GET', Uri.parse('http://incap.bssoln.com/api/logout'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    var result = null;
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      print("after logging out");
+      var userDataDeleted = await SharedPreferences.getInstance().then((prefs) {
+        return prefs.remove('anyvas_user');
+      });
+      if (userDataDeleted) {
+        _loggedIn = false;
+        _userData = null;
+        notifyListeners();
+        return userDataDeleted;
+      }
+    } else {
+      print(response.reasonPhrase);
+      print("after logging error ");
+    }
+    print(" logging out failed");
+    notifyListeners();
+    return false;
   }
 }
 
