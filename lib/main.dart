@@ -1,13 +1,11 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:anyvas_api_testing/models/product_model.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/screens/auth_screen.dart';
-import 'package:anyvas_api_testing/screens/product_details.dart';
-import 'package:anyvas_api_testing/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './providers/product_list_provider.dart';
-import './providers/categories_provider.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+//////// import of providers and routes ////////
+import '../configs/providers_list.dart';
+import '../configs/routes.dart';
+//////// import of other screens, widgets ////////
+import '../screens/splash_screen.dart';
 import './theme.dart';
 import './widgets/products_overview_screen.dart';
 
@@ -20,20 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: AuthProvider(),
-        ),
-        ChangeNotifierProvider.value(
-          value: CategoriesProvider(),
-        ),
-        ChangeNotifierProvider.value(
-          value: ProductListProvider(),
-        ),
-        ChangeNotifierProvider.value(
-          value: ProductMdl(),
-        )
-      ],
+      providers: ProvidersList.providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme(),
@@ -45,12 +30,7 @@ class MyApp extends StatelessWidget {
           nextScreen: ProductsOverviewScreen(),
           backgroundColor: const Color(0xff001a41),
         ),
-        routes: {
-          AuthScreen.routeName: (context) => AuthScreen(),
-          ProductsOverviewScreen.routeName: (context) =>
-              ProductsOverviewScreen(),
-          ProductDetailsScreen.routeName: (context) => ProductDetailsScreen(),
-        },
+        routes: Routes.routes,
       ),
     );
   }
