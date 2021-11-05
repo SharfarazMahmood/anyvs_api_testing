@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'package:anyvas_api_testing/helpers/http_helper.dart';
+import 'package:anyvas_api_testing/helpers/storage_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/category.dart';
 
 class CategoriesProvider with ChangeNotifier {
@@ -13,75 +14,45 @@ class CategoriesProvider with ChangeNotifier {
     return [..._items];
   }
 
-  Future<void> getCategoriesFromAPI() async {
-    print('no saved category, using HTTP requests');
-    var headers = {
-      'NST':
-          'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJOU1RfS0VZIjoidGVzdGFwaTEyM3Nha2hhdyJ9.l9txvKvpCrPsW78C9CFfUEVBbZcPpC7kBESRWBUthWjBG6dfP0YgrtoNKoe-PHExT_LGzYXoT1vvxGzWKxDGMA',
-      'Token':
-          'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJOU1RfS0VZIjoidGVzdGFwaTEyM3Nha2hhdyJ9.ca-7lHYgFnU_LXR_Q6_j3pIVb8oAkbn7kDonJn_4SepPhewJ6AHJyLUoITkAsIeOhakoePZ1bjq1rAb3f0GwrQ',
-      'DeviceId': 'DeviceId',
-    };
+  Future<void> getCategories() async {
+    String? _savedData = null;
+    await StorageHelper.loadData(key: 'categoryList').then((String result) {
+      _savedData = result;
+    });
+    if (_savedData != null &&
+        !_savedData!.contains("no data found in storage.")) {
+      _items = Category.decode(_savedData!);
+      notifyListeners();
+    }
+
+    if (_items.length <= 0) {
+      await fetchFromAPI();
+    }
+  }
+
+  Future<void> fetchFromAPI() async {
     var request = http.Request(
         'GET', Uri.parse('http://incap.bssoln.com/api/categories'));
-
-    request.headers.addAll(headers);
+    request.headers.addAll(HttpHelper.headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
       var responseData = await response.stream.bytesToString();
-      // log(responseData);
 
       final extractedData = json.decode(responseData) as Map<String, dynamic>;
       final categoriesData = extractedData['Data']['Categories'] as List;
-      List<Category> categoriesList = [];
-      categoriesData.length;
-      categoriesList = createCategoryObject(categoriesData);
-
-      _items = categoriesList;
+      _items = createCategoryObject(categoriesData);
       notifyListeners();
 
-      String toBeSaved;
-      toBeSaved = Category.encode(_items);
-      // print(toBeSaved);
-
-      // Future<bool>? saved = null;
+      String toBeSaved = Category.encode(_items);
       try {
-        await SharedPreferences.getInstance().then((prefs) {
-          // saved = prefs.setString('categoryList', toBeSaved);
-          prefs.setString('categoryList', toBeSaved);
-        });
+        await StorageHelper.saveData(key: "categoryList", data: toBeSaved);
       } on Exception catch (e) {
         print(e);
       }
-      // print(saved.toString());
-
-      // _items.forEach((element) {
-      //   print(element.Name);
-      //   print(element.Id);
-      // });
     } else {
       print(response.reasonPhrase);
-    }
-  }
-
-  Future<void> getCategories() async {
-    await SharedPreferences.getInstance().then((prefs) {
-      String? _savedData = prefs.getString('categoryList') ?? null;
-      // print(_savedData);
-      if (_savedData != null) {
-        _items = Category.decode(_savedData);
-        notifyListeners();
-        // _items.forEach((element) {
-        //   print("${element.Name}  ${element.Id}");
-        // });
-        print('loading saved category data');
-      }
-    });
-
-    if (_items.length <= 0) {
-      await getCategoriesFromAPI();
     }
   }
 
