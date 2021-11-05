@@ -1,23 +1,24 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:anyvas_api_testing/helpers/encryption.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 // import 'dart:async';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:anyvas_api_testing/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/http_exception.dart';
 
 class AuthProvider with ChangeNotifier {
   bool _loggedIn = false;
-  String _userId = "no_id";
-  User? userData;
+  User? _userData;
 
   bool get loggedIn {
     return _loggedIn;
   }
 
-  String get userId {
-    return _userId;
+  User? get user {
+    return _userData;
   }
 
   Future<bool> _authenticate(String? email, String? password) async {
@@ -39,12 +40,24 @@ class AuthProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         var responseData = await response.stream.bytesToString();
-        userData = await createUserObject(responseData);
-        print("${userData!.username} ${userData!.userToken.toString()}");
+        _userData = await createUserObject(
+            responseData, EncryDecry.methods().toEncrypt(password!));
+
+        String toBeSaved;
+        toBeSaved = User.encode(_userData);
+        try {
+          await SharedPreferences.getInstance().then((prefs) {
+            prefs.setString('anyvas_user', toBeSaved);
+          });
+        } on Exception catch (e) {
+          print(e);
+        }
+
+        print("${_userData!.username} ${_userData!.token.toString()}");
         _loggedIn = true;
         notifyListeners();
+        print('LOGGED IN ');
         return true;
-
         // log(responseData);
       } else {
         print(" ${response.statusCode} - ${response.reasonPhrase} ");
@@ -69,6 +82,28 @@ class AuthProvider with ChangeNotifier {
     return false;
   }
 
+  Future<bool>? autoLogin() async {
+    bool res = false;
+    var result;
+    await SharedPreferences.getInstance().then((prefs) {
+      String? _savedData = prefs.getString('anyvas_user') ?? null;
+      // print(_savedData);
+      if (_savedData != null) {
+        _userData = User.decode(_savedData);
+        print('${_userData!.firstName}  ${_userData!.lastName}');
+        print('loading saved user data');
+        res = true;
+      }
+    });
+    if (res) {
+      result = _authenticate(
+        _userData!.email,
+        EncryDecry.methods().toDecrypt(_userData!.getCredential),
+      );
+    }
+    return result;
+  }
+
   Future<bool> login(String? email, String? password) async {
     return _authenticate(
       email,
@@ -91,15 +126,17 @@ Future<List<String>> createHttpErrorList(String responseData) async {
   return errorList;
 }
 
-Future<User> createUserObject(String responseData) async {
+Future<User> createUserObject(String responseData, String data) async {
   final extractedData = json.decode(responseData) as Map<String, dynamic>;
   final userData = User(
-      email: extractedData['Data']['Info']['Email'],
-      phone: extractedData['Data']['Info']['Phone'],
-      username: extractedData['Data']['Info']['Username'],
-      firstName: extractedData['Data']['Info']['FirstName'],
-      lastName: extractedData['Data']['Info']['LastName'],
-      token: extractedData['Data']['Token']);
+    email: extractedData['Data']['Info']['Email'],
+    phone: extractedData['Data']['Info']['Phone'],
+    username: extractedData['Data']['Info']['Username'],
+    firstName: extractedData['Data']['Info']['FirstName'],
+    lastName: extractedData['Data']['Info']['LastName'],
+    token: extractedData['Data']['Token'],
+    cred: data,
+  );
   // print("${userData.email}, ${userData.phone} ${userData.username} ");
 
   return userData;

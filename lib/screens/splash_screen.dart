@@ -1,5 +1,7 @@
+import 'package:anyvas_api_testing/providers/auth_provider.dart';
 import 'package:anyvas_api_testing/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -14,6 +16,18 @@ class _SplashState extends State<Splash> {
     super.initState();
 
     // _navigateToHome();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    var auth = Provider.of<AuthProvider>(context,listen: false);
+    auth.autoLogin();
+    if (auth.loggedIn) {
+    } else if (!auth.loggedIn) {
+
+    }
   }
 
   _navigateToHome() async {
