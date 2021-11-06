@@ -1,7 +1,9 @@
-import 'package:anyvas_api_testing/models/http_exception.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:anyvas_api_testing/models/http_exception.dart';
+import 'package:anyvas_api_testing/providers/auth_provider.dart';
+import 'package:anyvas_api_testing/form_validation/error_dialog.dart';
+import 'package:anyvas_api_testing/form_validation/form_validators.dart';
 
 enum AuthMode {
   Signup,
@@ -28,26 +30,6 @@ class _AuthCardState extends State<AuthCard>
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
-  /////////////////////////////////////////////////////////
-
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('An error occurred'),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Okay'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-          )
-        ],
-      ),
-    );
-  }
-
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) {
       // Invalid!
@@ -70,29 +52,28 @@ class _AuthCardState extends State<AuthCard>
         }
       }
     } on HttpException catch (error) {
-      _showErrorDialog(error.toString());
+      ErrorDialog.showErrorDialog(context, error.toString());
     } catch (error) {
       print(error);
-      var errorMessage = 'Could not authenticate. Please try again later.';
-      _showErrorDialog(errorMessage);
+      ErrorDialog.showErrorDialog(
+          context, 'Could not authenticate. Please try again later.');
     }
-
     setState(() {
       _isLoading = false;
     });
   }
 
-  void _switchAuthMode() {
-    if (_authMode == AuthMode.Login) {
-      setState(() {
-        _authMode = AuthMode.Signup;
-      });
-    } else {
-      setState(() {
-        _authMode = AuthMode.Login;
-      });
-    }
-  }
+  // void _switchAuthMode() {
+  //   if (_authMode == AuthMode.Login) {
+  //     setState(() {
+  //       _authMode = AuthMode.Signup;
+  //     });
+  //   } else {
+  //     setState(() {
+  //       _authMode = AuthMode.Login;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -119,16 +100,12 @@ class _AuthCardState extends State<AuthCard>
                 SizedBox(height: 20),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'E-Mail',
-                    hintText: "Enter a email",
+                    labelText: 'Phone or Email',
+                    hintText: "",
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    // if (value!.isEmpty ) {
-                    //   return 'Invalid email!';
-                    // }
-                    return null;
-                  },
+                  validator: (value) =>
+                      FormValidators.emailorPhoneValidator(value),
                   onSaved: (value) {
                     _authData['email'] = value!;
                   },
@@ -138,12 +115,7 @@ class _AuthCardState extends State<AuthCard>
                   decoration: InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   controller: _passwordController,
-                  validator: (value) {
-                    if (value!.isEmpty || value.length < 5) {
-                      return 'Password is too short!';
-                    }
-                    return null;
-                  },
+                   validator: (value) => FormValidators.passwordValidator(value),
                   onSaved: (value) {
                     _authData['password'] = value!;
                   },
