@@ -141,16 +141,10 @@ class _SignUpFormState extends State<SignUpForm> {
       onSaved: (value) => password = value,
       validator: (value) => FormValidators.phoneValidator(value),
       decoration: InputDecoration(
-        prefix: Container(
-          width: 10,
-          height: 10,
-          color: Colors.red,
+        prefix: 
+        Container(
+          child: Text('+88', style: TextStyle(color: Colors.black)),
         ),
-        // Container(
-        //   child: Text('+88', style: TextStyle(color: Colors.black)),
-        // ),
-        // prefixText: "+88",
-        // prefixStyle: TextStyle(color: Colors.black),
         labelText: "Phone",
         hintText: "Enter a phone number",
         floatingLabelBehavior: FloatingLabelBehavior.always,
