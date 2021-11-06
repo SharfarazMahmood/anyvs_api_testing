@@ -1,10 +1,7 @@
 class FormValidators {
     static String? emailorPhoneValidator(String? value) {
     if (value!.isEmpty) {
-      return "Enter a password";
-    }
-    if (value.isEmpty || value.length < 5) {
-      return 'Password is too short!';
+      return "Enter a phone of email !";
     }
     return null;
   }
@@ -14,7 +11,7 @@ class FormValidators {
       return "Enter a password";
     }
     if (value.isEmpty || value.length < 5) {
-      return 'Password is too short!';
+      return 'Password is too short !';
     }
     return null;
   }
