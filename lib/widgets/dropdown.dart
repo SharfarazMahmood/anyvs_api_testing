@@ -1,8 +1,10 @@
+import 'package:anyvas_api_testing/configs/constants.dart';
+import 'package:anyvas_api_testing/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../configs/enums.dart';
 import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/screens/authentication/auth_screen.dart';
+import 'package:anyvas_api_testing/screens/login/login_screen.dart';
 
 class DropDownMenu extends StatefulWidget {
   DropDownMenu({Key? key}) : super(key: key);
@@ -19,17 +21,21 @@ class _DropDownMenuState extends State<DropDownMenu> {
       return PopupMenuButton(
         onSelected: (AuthenticationType selectedValue) {
           // setState(() {
-            if (selectedValue == AuthenticationType.Login) {
-              Navigator.of(context).pushNamed(AuthScreen.routeName);
-            } else if (selectedValue == AuthenticationType.Logout) {
-              user.logout();
-            } else if (selectedValue == AuthenticationType.Signup) {
-            } else if (selectedValue == AuthenticationType.None) {}
+          if (selectedValue == AuthenticationType.Login) {
+            Navigator.of(context).pushNamed(LoginScreen.routeName);
+          } else if (selectedValue == AuthenticationType.Logout) {
+            user.logout();
+          } else if (selectedValue == AuthenticationType.Signup) {
+            Navigator.of(context).pushNamed(SignupScreen.routeName);
+          } else if (selectedValue == AuthenticationType.None) {}
           // });
         },
         child: Row(
           children: <Widget>[
-            user.loggedIn ? Text("${user.user!.firstName}") : Text("  "),
+            Text(
+              "${user.loggedIn ? user.user!.firstName : ' '}",
+              style: TextStyle(color: kTextColor),
+            ),
             SizedBox(width: 4),
             Padding(
               padding: const EdgeInsets.all(5.0),

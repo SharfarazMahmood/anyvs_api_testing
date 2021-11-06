@@ -1,3 +1,4 @@
+import 'package:anyvas_api_testing/configs/size_config.dart';
 import 'package:anyvas_api_testing/providers/auth_provider.dart';
 import 'package:anyvas_api_testing/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,10 @@ class _SplashState extends State<Splash> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    var auth = Provider.of<AuthProvider>(context,listen: false);
+    var auth = Provider.of<AuthProvider>(context, listen: false);
     auth.autoLogin();
     if (auth.loggedIn) {
-    } else if (!auth.loggedIn) {
-
-    }
+    } else if (!auth.loggedIn) {}
   }
 
   _navigateToHome() async {
@@ -41,6 +40,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
