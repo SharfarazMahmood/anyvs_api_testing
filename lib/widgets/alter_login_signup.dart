@@ -1,6 +1,7 @@
-import 'package:anyvas_api_testing/configs/constants.dart';
-import 'package:anyvas_api_testing/configs/size_config.dart';
 import 'package:flutter/material.dart';
+//////// import of config files ////////
+import '../configs/constants.dart';
+import '../configs/size_config.dart';
 
 class AlterLoginSignup extends StatelessWidget {
   final String? text;
@@ -27,7 +28,10 @@ class AlterLoginSignup extends StatelessWidget {
           child: Text(
             "$routeText",
             style: TextStyle(
-                fontSize: proportionateWidth(16), color: kPrimaryColor),
+              fontSize: proportionateWidth(16),
+              fontWeight: FontWeight.bold,
+              color: kPrimaryColor,
+            ),
           ),
         ),
       ],

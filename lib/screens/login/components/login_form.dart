@@ -1,12 +1,13 @@
-import 'package:anyvas_api_testing/configs/constants.dart';
-import 'package:anyvas_api_testing/configs/size_config.dart';
-import 'package:anyvas_api_testing/form_validation/error_dialog.dart';
-import 'package:anyvas_api_testing/form_validation/form_validators.dart';
-import 'package:anyvas_api_testing/models/http_exception.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//////// import of config files ////////
+import '../../../configs/size_config.dart';
+import '../../../form_validation/error_dialog.dart';
+import '../../../form_validation/form_validators.dart';
+//////// import of other screens, widgets ////////
+import '../../../models/http_exception.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../widgets/default_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -65,9 +66,9 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           emailOrPhoneField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
+          sized_box,
           passwordField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
+          sized_box,
           if (_isLoading)
             CircularProgressIndicator()
           else
@@ -80,8 +81,9 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+/////////////////////////////////////
+  var sized_box = SizedBox(height: SizeConfig.screenHeight * 0.02);
 ////////////email or phone form field
-
   TextFormField emailOrPhoneField() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
@@ -89,8 +91,7 @@ class _LoginFormState extends State<LoginForm> {
       validator: (value) => FormValidators.emailOrPhoneValidator(value),
       decoration: InputDecoration(
         labelText: "Email/Phone",
-        hintText: "Enter your email/phone",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Enter your email/phone",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
@@ -104,8 +105,7 @@ class _LoginFormState extends State<LoginForm> {
       validator: (value) => FormValidators.passwordValidator(value),
       decoration: InputDecoration(
         labelText: "Password",
-        hintText: "Enter password",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Enter password",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );

@@ -1,12 +1,11 @@
-import 'package:anyvas_api_testing/configs/constants.dart';
-import 'package:anyvas_api_testing/configs/size_config.dart';
-import 'package:anyvas_api_testing/form_validation/error_dialog.dart';
-import 'package:anyvas_api_testing/form_validation/form_validators.dart';
-import 'package:anyvas_api_testing/models/http_exception.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/widgets/default_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+//////// import of config files ////////
+import '../../../configs/size_config.dart';
+import '../../../form_validation/error_dialog.dart';
+import '../../../form_validation/form_validators.dart';
+//////// import of other screens, widgets ////////
+import '../../../models/http_exception.dart';
+import '../../../widgets/default_button.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -23,6 +22,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String? phone;
   String? password;
   String? confirmPassword;
+  String _enteredPhone = "";
   final _passwordController = TextEditingController();
   var _isLoading = false;
 
@@ -65,17 +65,17 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         children: [
           firstNameField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
+          sized_box,
           lastNameField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
+          sized_box,
           emailOrPhoneField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
-          passwordField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
-          confirmPasswordField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
+          sized_box,
           phoneNumberField(),
-          SizedBox(height: SizeConfig.screenHeight * 0.03),
+          sized_box,
+          passwordField(),
+          sized_box,
+          confirmPasswordField(),
+          sized_box,
           if (_isLoading)
             CircularProgressIndicator()
           else
@@ -89,6 +89,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   //////////////////////////////////////
+  var sized_box = SizedBox(height: SizeConfig.screenHeight * 0.03);
   //////////// first name field
   TextFormField firstNameField() {
     return TextFormField(
@@ -97,8 +98,7 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) => FormValidators.nameValidator(value),
       decoration: InputDecoration(
         labelText: "First name",
-        hintText: "Enter a first name",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Enter a first name",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
@@ -112,8 +112,7 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) => FormValidators.nameValidator(value),
       decoration: InputDecoration(
         labelText: "Last name",
-        hintText: "Enter a last name",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Enter a last name",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
@@ -128,7 +127,6 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Email",
         hintText: "Enter an email",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
@@ -140,14 +138,28 @@ class _SignUpFormState extends State<SignUpForm> {
       keyboardType: TextInputType.phone,
       onSaved: (value) => password = value,
       validator: (value) => FormValidators.phoneValidator(value),
+      onChanged: (value) {
+        setState(() {
+          _enteredPhone = value;
+        });
+      },
       decoration: InputDecoration(
-        prefix: 
-        Container(
+        prefix: Container(
           child: Text('+88', style: TextStyle(color: Colors.black)),
         ),
+        suffix: Container(
+          child: Text(
+            _enteredPhone.length > 0
+                ? '${_enteredPhone.length.toString()}'
+                : "",
+            style: TextStyle(
+              color: _enteredPhone.length == 11 ? Colors.black : Colors.red,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
         labelText: "Phone",
-        hintText: "Enter a phone number",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Enter a phone number",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
@@ -162,8 +174,7 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) => FormValidators.passwordValidator(value),
       decoration: InputDecoration(
         labelText: "Password",
-        hintText: "Enter a password",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Enter a password",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
@@ -177,8 +188,7 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) => FormValidators.confirmPasswordValidator(value),
       decoration: InputDecoration(
         labelText: "Confirm Password",
-        hintText: "Re-enter password",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // hintText: "Re-enter password",
         // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );

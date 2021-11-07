@@ -14,9 +14,9 @@ class FormValidators {
   }
 
   static String? emailValidator(String? value) {
-    if (value!.isEmpty) {
-      return "Enter an email";
-    }
+    // if (value!.isEmpty) {
+    //   return "Enter an email";
+    // }
     return null;
   }
 

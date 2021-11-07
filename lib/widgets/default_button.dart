@@ -18,7 +18,7 @@ class DefaultButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 16.0),
         textStyle: TextStyle(
           color: Theme.of(context).primaryTextTheme.button!.color,
         ),

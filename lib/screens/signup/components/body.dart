@@ -1,8 +1,11 @@
-import 'package:anyvas_api_testing/screens/login/login_screen.dart';
-import 'package:anyvas_api_testing/screens/signup/components/signup_form.dart';
 import 'package:flutter/material.dart';
-import 'package:anyvas_api_testing/configs/size_config.dart';
-import 'package:anyvas_api_testing/widgets/alter_login_signup.dart';
+//////// import of config files ////////
+import '../../../configs/constants.dart';
+import '../../../configs/size_config.dart';
+//////// import of other screens, widgets ////////
+import '../../../screens/login/login_screen.dart';
+import '../../../screens/signup/components/signup_form.dart';
+import '../../../widgets/alter_login_signup.dart';
 import '../../../widgets/social_icon.dart';
 
 class Body extends StatelessWidget {
@@ -25,7 +28,7 @@ class Body extends StatelessWidget {
                 Text(
                   "Registration",
                   style: TextStyle(
-                    color: Color(0xff001a41),
+                    color: kPrimaryColor,
                     fontSize: proportionateWidth(28),
                     fontWeight: FontWeight.bold,
                   ),
@@ -34,13 +37,13 @@ class Body extends StatelessWidget {
                 Text(
                   "Fill up the form \nor continue with social accounts.",
                   style: TextStyle(
-                    color: Color(0xff001a41),
+                    color: kPrimaryColor,
                     fontSize: proportionateWidth(15),
                   ),
                   softWrap: true,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: SizeConfig.screenHeight * 0.06),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
                 SignUpForm(),
                 SizedBox(height: SizeConfig.screenHeight * 0.02),
                 SocialIcon.icons,

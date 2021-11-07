@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//////// import of config files ////////
 import 'constants.dart';
 
 ThemeData theme() {
@@ -9,25 +9,25 @@ ThemeData theme() {
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
     inputDecorationTheme: inputDecorationTheme(),
-    visualDensity: VisualDensity.adaptivePlatformDensity,
+    visualDensity: VisualDensity.compact,
   );
 }
 
 InputDecorationTheme inputDecorationTheme() {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(5),
-    // borderSide: const BorderSide(color: kTextColor),
-    gapPadding: 10,
+    // borderRadius: BorderRadius.circular(5),
+    // // borderSide: const BorderSide(color: kTextColor),
+    // gapPadding: 10,
   );
   return InputDecorationTheme(
-    floatingLabelBehavior: FloatingLabelBehavior.never,
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 20,
-      vertical: 10,
-    ),
-    // enabledBorder: outlineInputBorder,
-    // focusedBorder: outlineInputBorder,
-    border: outlineInputBorder,
+    floatingLabelBehavior: FloatingLabelBehavior.auto,
+    // contentPadding: const EdgeInsets.symmetric(
+    //   horizontal: 20,
+    //   vertical: 10,
+    // ),
+    // // enabledBorder: outlineInputBorder,
+    // // focusedBorder: outlineInputBorder,
+    // border: outlineInputBorder,
   );
 }
 
