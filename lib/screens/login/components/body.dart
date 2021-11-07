@@ -1,9 +1,11 @@
-import 'package:anyvas_api_testing/configs/constants.dart';
-import 'package:anyvas_api_testing/configs/size_config.dart';
-import 'package:anyvas_api_testing/screens/signup/signup_screen.dart';
-import 'package:anyvas_api_testing/widgets/alter_login_signup.dart';
-import 'package:anyvas_api_testing/widgets/social_icon.dart';
 import 'package:flutter/material.dart';
+//////// import of config files ////////
+import '../../../configs/constants.dart';
+import '../../../configs/size_config.dart';
+//////// import of other screens, widgets ////////
+import '../../../screens/signup/signup_screen.dart';
+import '../../../widgets/alter_login_signup.dart';
+import '../../../widgets/social_icon.dart';
 
 import 'login_form.dart';
 

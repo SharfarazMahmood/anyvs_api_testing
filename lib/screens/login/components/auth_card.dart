@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:anyvas_api_testing/models/http_exception.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/form_validation/error_dialog.dart';
-import 'package:anyvas_api_testing/form_validation/form_validators.dart';
+import '../../../models/http_exception.dart';
+import '../../../providers/auth_provider.dart';
+import '../../../form_validation/error_dialog.dart';
+import '../../../form_validation/form_validators.dart';
 
 enum AuthMode {
   Signup,

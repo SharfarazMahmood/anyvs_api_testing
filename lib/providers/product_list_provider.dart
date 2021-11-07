@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:anyvas_api_testing/helpers/http_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:anyvas_api_testing/models/product_model.dart';
+//////// import of config files ////////
+import '../helpers/http_helper.dart';
+import '../models/product_model.dart';
 
 class ProductListProvider with ChangeNotifier {
   List<ProductMdl> _items = [];

@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:anyvas_api_testing/helpers/encryption.dart';
-import 'package:anyvas_api_testing/helpers/http_helper.dart';
-import 'package:anyvas_api_testing/helpers/storage_helper.dart';
-import 'package:anyvas_api_testing/models/user.dart';
+//////// import of config files ////////
+import '../helpers/encryption.dart';
+import '../helpers/http_helper.dart';
+import '../helpers/storage_helper.dart';
+import '../models/user.dart';
 import '../models/http_exception.dart';
 
 class AuthProvider with ChangeNotifier {

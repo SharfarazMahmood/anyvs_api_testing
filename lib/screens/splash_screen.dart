@@ -1,8 +1,8 @@
-import 'package:anyvas_api_testing/configs/size_config.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../configs/size_config.dart';
+import '../providers/auth_provider.dart';
+import '../screens/products_overview_screen.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

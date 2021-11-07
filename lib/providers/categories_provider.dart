@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:anyvas_api_testing/helpers/http_helper.dart';
-import 'package:anyvas_api_testing/helpers/storage_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+//////// import of config files ////////
+import '../helpers/http_helper.dart';
+import '../helpers/storage_helper.dart';
 import '../models/category.dart';
 
 class CategoriesProvider with ChangeNotifier {

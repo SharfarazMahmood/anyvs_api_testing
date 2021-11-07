@@ -25,53 +25,7 @@ class ProductMdl with ChangeNotifier {
     this.defaultPictureModel,
   });
 
-  // Map model = {
-  //   "ManufacturerName": "Roadster",
-  //   "DiscountName": "",
-  //   "Name": "Men Brown & Black Slim Fit Checked Casual Shirt",
-  //   "ShortDescription":
-  //       "100% Original Products - \r\nPay on delivery might be available - \r\nEasy 30 days returns and exchanges - \r\nTry & Buy might be available",
-  //   "FullDescription": "discription",
-  //   "Sku": "DS_VA3_PC",
-  //   "ProductType": 5,
-  //   "MarkAsNew": false,
-  //   "ProductPrice": {
-  //     "OldPrice": null,
-  //     "Price": "Tk 1520",
-  //     "PriceValue": 1520.0000,
-  //     "BasePricePAngV": null,
-  //     "DisableBuyButton": false,
-  //     "DisableWishlistButton": false,
-  //     "DisableAddToCompareListButton": false,
-  //     "AvailableForPreOrder": false,
-  //     "PreOrderAvailabilityStartDateTimeUtc": null,
-  //     "IsRental": false,
-  //     "ForceRedirectionAfterAddingToCart": false,
-  //     "DisplayTaxShippingInfo": false,
-  //     "CustomProperties": {}
-  //   },
-  //   "DefaultPictureModel": {
-  //     "ImageUrl":
-  //         "http://incap.bssoln.com/images/thumbs/0000524_men-brown-black-slim-fit-checked-casual-shirt_415.webp",
-  //     "ThumbImageUrl": null,
-  //     "FullSizeImageUrl":
-  //         "http://incap.bssoln.com/images/thumbs/0000524_men-brown-black-slim-fit-checked-casual-shirt.webp",
-  //     "Title": "Men Brown & Black Slim Fit Checked Casual Shirt",
-  //     "AlternateText": "Men Brown & Black Slim Fit Checked Casual Shirt",
-  //     "CustomProperties": {}
-  //   },
-  //   "ProductSpecificationModel": {"Groups": [], "CustomProperties": {}},
-  //   "ReviewOverviewModel": {
-  //     "ProductId": 2,
-  //     "RatingSum": 9,
-  //     "TotalReviews": 2,
-  //     "AllowCustomerReviews": true,
-  //     "CanAddNewReview": true,
-  //     "CustomProperties": {}
-  //   },
-  //   "Id": 2,
-  //   "CustomProperties": {}
-  // };
+
 
   Future<void> getProductDetails({int? id, int? updatecartitemid = 0}) async {
     var headers = {
@@ -155,21 +109,6 @@ class ProductPrice {
     this.DisplayTaxShippingInfo,
     this.CustomProperties,
   });
-  // Map model = {
-  //   "OldPrice": null,
-  //   "Price": "Tk 1520",
-  //   "PriceValue": 1520.0000,
-  //   "BasePricePAngV": null,
-  //   "DisableBuyButton": false,
-  //   "DisableWishlistButton": false,
-  //   "DisableAddToCompareListButton": false,
-  //   "AvailableForPreOrder": false,
-  //   "PreOrderAvailabilityStartDateTimeUtc": null,
-  //   "IsRental": false,
-  //   "ForceRedirectionAfterAddingToCart": false,
-  //   "DisplayTaxShippingInfo": false,
-  //   "CustomProperties": {}
-  // };
 }
 
 class PictureModel {
@@ -189,16 +128,6 @@ class PictureModel {
     this.customProperties,
   });
 
-  // Map model = {
-  //   "ImageUrl":
-  //       "http://incap.bssoln.com/images/thumbs/0000524_men-brown-black-slim-fit-checked-casual-shirt_415.webp",
-  //   "ThumbImageUrl": null,
-  //   "FullSizeImageUrl":
-  //       "http://incap.bssoln.com/images/thumbs/0000524_men-brown-black-slim-fit-checked-casual-shirt.webp",
-  //   "Title": "Men Brown & Black Slim Fit Checked Casual Shirt",
-  //   "AlternateText": "Men Brown & Black Slim Fit Checked Casual Shirt",
-  //   "CustomProperties": {}
-  // };
 }
 
 class ProductSpecificationModel {
@@ -217,12 +146,4 @@ class ReviewOverviewModel {
   bool? allowCustomerReviews;
   bool? canAddNewReview;
   Map? customProperties;
-  // Map model = {
-  //   "ProductId": 2,
-  //   "RatingSum": 9,
-  //   "TotalReviews": 2,
-  //   "AllowCustomerReviews": true,
-  //   "CanAddNewReview": true,
-  //   "CustomProperties": {}
-  // };
 }

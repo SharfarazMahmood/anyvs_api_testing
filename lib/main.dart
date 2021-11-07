@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-//////// import of providers and routes ////////
+//////// import of config files ////////
 import '../configs/providers_list.dart';
 import '../configs/routes.dart';
+import '../configs/theme.dart';
 //////// import of other screens, widgets ////////
 import '../screens/splash_screen.dart';
-import 'configs/theme.dart';
-import 'screens/products_overview_screen.dart';
+import '../screens/products_overview_screen.dart';
 
 void main() {
   runApp(const MyApp());

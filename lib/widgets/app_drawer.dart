@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//////// import of other screens, widgets ////////
 import '../providers/categories_provider.dart';
 import '../screens/category/categories_list.dart';
 

@@ -1,10 +1,12 @@
-import 'package:anyvas_api_testing/configs/constants.dart';
-import 'package:anyvas_api_testing/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//////// import of config files ////////
 import '../configs/enums.dart';
-import 'package:anyvas_api_testing/providers/auth_provider.dart';
-import 'package:anyvas_api_testing/screens/login/login_screen.dart';
+import '../configs/constants.dart';
+//////// import of other screens, widgets ////////
+import '../providers/auth_provider.dart';
+import '../screens/signup/signup_screen.dart';
+import '../screens/login/login_screen.dart';
 
 class DropDownMenu extends StatefulWidget {
   DropDownMenu({Key? key}) : super(key: key);

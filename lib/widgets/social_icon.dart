@@ -1,6 +1,7 @@
-import 'package:anyvas_api_testing/configs/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+//////// import of config files ////////
+import '../configs/size_config.dart';
 
 class SocialIcon extends StatelessWidget {
   final String? icon;

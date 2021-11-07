@@ -1,7 +1,8 @@
-import 'package:anyvas_api_testing/providers/product_list_provider.dart';
-import 'package:anyvas_api_testing/screens/product/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//////// import of other screens, widgets ////////
+import '../../../providers/product_list_provider.dart';
+import '../../../screens/product/product_item.dart';
 
 class ProductList extends StatelessWidget {
   final int? catId;

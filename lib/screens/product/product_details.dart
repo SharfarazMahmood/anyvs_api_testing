@@ -1,8 +1,9 @@
-import 'package:anyvas_api_testing/models/product_model.dart';
-import 'package:anyvas_api_testing/models/screen_arguments.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+//////// import of other screens, widgets ////////
+import '../../models/product_model.dart';
+import '../../models/screen_arguments.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static String routeName = "/ProductDetailsScreen";
